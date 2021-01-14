@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CategoriaReceta;
 use App\Receta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +23,8 @@ class RecetaController extends Controller
      */
     public function index()
     {
-        return view('recetas.index');
+        $recetas = auth()->user()->recetas;
+        return view('recetas.index')->with('recetas',$recetas);
     }
 
     /**
@@ -33,7 +35,9 @@ class RecetaController extends Controller
     public function create()
     {
 
-        $categorias = DB::table('categoria_receta')->get()->pluck('nombre','id');
+        // $categorias = DB::table('categoria_recetas')->get()->pluck('nombre','id');
+
+        $categorias = CategoriaReceta::all(['id','nombre']);
 
         return view('recetas/create')->with('categorias',$categorias);
     }
@@ -57,6 +61,8 @@ class RecetaController extends Controller
             'imagen' => 'required|image'
         ]);
 
+
+
         $ruta_imagen = $request['imagen']->store('upload-recetas','public');
 
         // ;
@@ -65,12 +71,23 @@ class RecetaController extends Controller
 
         $img->save();
 
-        DB::table('recetas')->insert([
+        // DB::table('recetas')->insert([
+        //     'titulo'=>$data['titulo'],
+        //     'ingredientes' => $data['ingredientes'],
+        //     'preparacion'=>$data['preparacion'],
+        //     'imagen' => $ruta_imagen,
+        //     'user_id' => Auth::user()->id,
+        //     'categoria_id' => $data['categoria']
+        // ]);
+
+
+        //store con modelo
+
+        auth()->user()->recetas()->create([
             'titulo'=>$data['titulo'],
             'ingredientes' => $data['ingredientes'],
             'preparacion'=>$data['preparacion'],
             'imagen' => $ruta_imagen,
-            'user_id' => Auth::user()->id,
             'categoria_id' => $data['categoria']
         ]);
 

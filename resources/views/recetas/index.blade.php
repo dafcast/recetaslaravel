@@ -20,13 +20,17 @@
                 
         </thead>
         <tbody>
-            <tr>
-                <td>Pizza de Pepperoni</td>
-                <td>Pizass</td>
-                <td>
-                    .
-                </td>
-            </tr>
+            @foreach($recetas as $receta)    
+                <tr>
+                    <td>{{$receta->titulo}}</td>
+                    <td>{{ $receta->categoria->nombre}}</td>
+                    <td>
+                        <a href="" class="btn btn-danger">Eliminar</a>
+                        <a href="" class="btn btn-dark">Editar</a>
+                        <a href="" class="btn btn-success">Ver</a>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
 
     </table>

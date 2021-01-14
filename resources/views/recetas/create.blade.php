@@ -37,11 +37,11 @@
                         class="form-control @error('categoria') is-invalid @enderror"
                     >
                         <option value="">-- Seleccione --</option>
-                        @foreach($categorias as $id => $categoria)
+                        @foreach($categorias as $categoria)
 
-                            <option value="{{$id}}"
-                                {{ old('categoria') == $id ? 'selected' : '' }}
-                            >{{$categoria}}</option>
+                            <option value="{{$categoria->id}}"
+                                {{ old('categoria') == $categoria->id ? 'selected' : '' }}
+                            >{{$categoria->nombre}}</option>
                         @endforeach
                     </select>
                     @error('categoria')
