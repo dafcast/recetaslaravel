@@ -14,7 +14,8 @@ class RecetaController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth', ['except' => ['show', 'create']]);
+        $this->middleware('auth', ['except' => 'show']);
     }
     /**
      * Display a listing of the resource.
@@ -102,7 +103,7 @@ class RecetaController extends Controller
      */
     public function show(Receta $receta)
     {
-        //
+        return view('recetas.show',compact('receta'));
     }
 
     /**
