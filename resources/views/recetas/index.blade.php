@@ -25,9 +25,16 @@
                     <td class="align-middle">{{$receta->titulo}}</td>
                     <td class="align-middle">{{ $receta->categoria->nombre}}</td>
                     <td class="align-middle">
-                        <a href="" class="btn m-1 btn-danger">Eliminar</a>
-                        <a href="" class="btn m-1 btn-dark">Editar</a>
-                        <a href="{{ route('recetas.show',['receta' => $receta->id]) }}" class="btn m-1 btn-success">Ver</a>
+                        {{-- <form action="{{ route('recetas.destroy',[ 'receta' => $receta->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" class="btn d-block m-1 btn-danger w-100" value="Eliminar">
+                        </form> --}}
+
+                        <eliminar-receta receta-id="{{ $receta->id }}"></eliminar-receta>
+                        
+                        <a href="{{ route('recetas.edit',['receta' => $receta->id]) }}" class="btn w-100 d-block m-1 btn-dark">Editar</a>
+                        <a href="{{ route('recetas.show',['receta' => $receta->id]) }}" class="btn w-100 d-block m-1 btn-success">Ver</a>
                     </td>
                 </tr>
             @endforeach

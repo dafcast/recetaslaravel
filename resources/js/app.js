@@ -6,6 +6,8 @@
 
 require('./bootstrap');
 
+import Vue from 'vue';
+import VueSweetalert2 from 'vue-sweetalert2';
 window.Vue = require('vue');
 
 /**
@@ -22,7 +24,10 @@ window.Vue = require('vue');
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.config.ignoredElements= ['trix-editor', 'trix-toolbar'];
 
+Vue.use(VueSweetalert2);
+
 Vue.component('fecha-receta', require('./components/FechaReceta.vue').default);
+Vue.component('eliminar-receta', require('./components/EliminarReceta.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
