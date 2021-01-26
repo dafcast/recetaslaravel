@@ -32,6 +32,11 @@ Route::put('/recetas/{receta}','RecetaController@update')->name('recetas.update'
 Route::delete('/recetas/{receta}','RecetaController@destroy')->name('recetas.destroy');
 
 
+
+Route::get('/perfils/{perfil}','PerfilController@show')->name('perfils.show');
+Route::get('/perfils/{perfil}/edit','PerfilController@edit')->name('perfils.edit');
+Route::put('/perfils/{perfil}','PerfilController@update')->name('perfils.update');
+
 // Route::get('/nosotros', function () {
 //     return view('nosotros');
 // });
