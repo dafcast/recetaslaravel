@@ -14,6 +14,12 @@ class PerfilController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware('auth', ['except' => 'show']);
+    }
+    
+
+
     public function index()
     {
         //
@@ -59,6 +65,8 @@ class PerfilController extends Controller
      */
     public function edit(Perfil $perfil)
     {
+        $this->authorize('view',$perfil);
+        
         return view('perfils.edit', compact('perfil'));
     }
 
@@ -71,7 +79,8 @@ class PerfilController extends Controller
      */
     public function update(Request $request, Perfil $perfil)
     {
-        
+        $this->authorize('update',$perfil);
+
         $data = $request->validate([
             'nombre' => 'required',
             'url' => 'required|url',
@@ -97,8 +106,9 @@ class PerfilController extends Controller
             unset($data['imagen']);
         }
 
-        
-        return auth()->user()->perfil()->update($data);
+        auth()->user()->perfil()->update($data);
+
+        return redirect()->action('RecetaController@index');
 
     }
 
