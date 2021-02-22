@@ -2,9 +2,10 @@
 
 namespace App;
 
+use App\Receta;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -69,5 +70,9 @@ class User extends Authenticatable
 
     public function perfil(){
         return $this->hasOne(Perfil::class);
+    }
+
+    public function meGusta(){
+        return $this->belongsToMany(Receta::class,'likes_recetas');
     }
 }

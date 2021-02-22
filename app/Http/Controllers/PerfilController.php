@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Perfil;
+use App\Receta;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
@@ -54,7 +55,8 @@ class PerfilController extends Controller
      */
     public function show(Perfil $perfil)
     {
-        return view('perfils.show', compact('perfil'));
+        $recetas = Receta::where('user_id',$perfil->user->id)->paginate(7);
+        return view('perfils.show', compact('perfil','recetas'));
     }
 
     /**

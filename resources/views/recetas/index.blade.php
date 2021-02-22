@@ -8,7 +8,9 @@
 <h2 class="text-center mb-3">Administra tus recetas</h2>
 
 <div class="col-md-10 mx-auto bg-white p-3">
-
+    <div class="d-flex justify-content-center">
+        {{ $recetas->links()}}
+    </div>
     <table class="table">
         <thead class="bg-primary text-light">
             <tr>
@@ -40,5 +42,21 @@
         </tbody>
 
     </table>
+    <div class="d-flex justify-content-center">
+        {{ $recetas->links()}}
+    </div>
+</div>
+
+<h2 class="text-center">Recetas que te gustan</h2>
+<div class="col-md-8 mx-auto">
+
+    <ul class="list-group my-3">
+        @foreach($usuario->meGusta as $recetasLike)
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p>{{$recetasLike->titulo}}</p>
+                <a href="{{ route('recetas.show',['receta' => $recetasLike->id]) }}" class="btn btn-outline-success">Ver</a>
+            </li>
+        @endforeach
+    </ul>
 </div>
 @endsection

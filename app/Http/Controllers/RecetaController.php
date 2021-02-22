@@ -24,8 +24,12 @@ class RecetaController extends Controller
      */
     public function index()
     {
-        $recetas = auth()->user()->recetas;
-        return view('recetas.index')->with('recetas',$recetas);
+        $user = auth()->user();
+
+        $recetas = Receta::where('user_id',$user->id)->paginate(5);
+        // dd($recetas->get());
+        return view('recetas.index')->with('recetas',$recetas)
+                                    ->with('usuario',$user);
     }
 
     /**
@@ -99,7 +103,8 @@ class RecetaController extends Controller
      */
     public function show(Receta $receta)
     {
-        return view('recetas.show',compact('receta'));
+        $like = auth()->user() ? auth()->user()->meGusta->contains($receta) : false;
+        return view('recetas.show',compact('receta','like'));
     }
 
     /**

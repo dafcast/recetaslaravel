@@ -10,7 +10,7 @@
             <img src="/storage/{{$receta->imagen}}" class="img-fluid mx-auto d-block my-3">
             <p><span class="font-weight-bold text-primary">Creado en: </span>{{$receta->categoria->nombre}}</p>
 
-            <p><span class="font-weight-bold text-primary">Creado por: </span>{{$receta->autor->name}}</p>
+            <p><span class="font-weight-bold text-primary">Creado por: </span><a href="{{ route('perfils.show',['perfil' => $receta->autor->id])}}">{{$receta->autor->name}}</a></p>
             
             <p>
                 <span class="font-weight-bold text-primary">Creado el: </span>
@@ -28,6 +28,13 @@
                 {!!$receta->preparacion!!}
             </div>
 
+            <div class="d-flex justify-content-center">
+                <like-receta
+                    receta-id="{{$receta->id}}"
+                    like="{{$like}}"
+                    likes="{{$receta->likes->count()}}"
+                ></like-receta>
+            </div>
         </div>
     </article>
 @endsection
