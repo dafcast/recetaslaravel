@@ -4,6 +4,7 @@ body {
 }
 trix-editor {
     min-height: 400px;
+    overflow: auto;
 }
 .bg-primary .navbar-brand {
     color: white;
