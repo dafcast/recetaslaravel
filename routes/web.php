@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/','InicioController@index')->name('inicio.index');
 
 Auth::routes();
 
@@ -39,6 +41,13 @@ Route::put('/perfils/{perfil}','PerfilController@update')->name('perfils.update'
 
 
 Route::post('likes/{receta}','LikesController@update')->name('likes.update');
+
+// buscador
+
+
+Route::get('/buscar','RecetaController@search')->name('buscar.search');
+
+Route::get('categorias/{categoriaReceta}','CategoriaRecetaController@show')->name('categorias.show');
 
 // Route::get('/nosotros', function () {
 //     return view('nosotros');

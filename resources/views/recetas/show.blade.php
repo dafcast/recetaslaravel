@@ -3,14 +3,14 @@
 @section('content')
     {{-- <h4>{{$receta}}</h4> --}}
 
-    <article class="contenido-receta">
+    <article class="contenido-receta bg-white px-5 pt-5 shadow">
         <h1 class="text-center text-primary">{{ $receta->titulo}}</h1>
 
         <div class="receta-meta">
             <img src="/storage/{{$receta->imagen}}" class="img-fluid mx-auto d-block my-3">
-            <p><span class="font-weight-bold text-primary">Creado en: </span>{{$receta->categoria->nombre}}</p>
+            <p><span class="font-weight-bold text-primary">Creado en: </span><a class="text-dark" href="{{ route('categorias.show',['categoriaReceta' => $receta->categoria->id])}}">{{$receta->categoria->nombre}}</a></p>
 
-            <p><span class="font-weight-bold text-primary">Creado por: </span><a href="{{ route('perfils.show',['perfil' => $receta->autor->id])}}">{{$receta->autor->name}}</a></p>
+            <p><span class="font-weight-bold text-primary">Creado por: </span><a class="text-dark" href="{{ route('perfils.show',['perfil' => $receta->autor->id])}}">{{$receta->autor->name}}</a></p>
             
             <p>
                 <span class="font-weight-bold text-primary">Creado el: </span>
